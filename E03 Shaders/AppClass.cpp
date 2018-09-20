@@ -115,6 +115,13 @@ void AppClass::ProcessKeyboard(sf::Event a_event)
 		m_v3Color = glm::vec3(0.0f, 0.0f, 1.0f);
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num0))
 		m_v3Color = glm::vec3(-1.0f, -1.0f, -1.0f);
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num4)) {
+		if(m_v3Color.r != -1.0f && m_v3Color.g != -1.0f && m_v3Color.b != -1.0f)
+			m_v3Color = glm::vec3(1.0f - m_v3Color.r, 1.0f - m_v3Color.g, 1.0f - m_v3Color.b);
+		else
+			m_v3Color = glm::vec3(1.0f + m_v3Color.r, 1.0f + m_v3Color.g, 1.0f + m_v3Color.b);	//makes the triangle black when gradient
+	}
+		//m_v3Color = glm::vec3(1.0f - m_v3Color.r, 1.0f - m_v3Color.g, 1.0f - m_v3Color.b);	//makes triangle white if on gradient triangle
 }
 void AppClass::Display(void)
 {
