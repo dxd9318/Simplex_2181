@@ -116,10 +116,7 @@ void AppClass::ProcessKeyboard(sf::Event a_event)
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num0))
 		m_v3Color = glm::vec3(-1.0f, -1.0f, -1.0f);
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num4)) {
-		if(m_v3Color.r != -1.0f && m_v3Color.g != -1.0f && m_v3Color.b != -1.0f)
-			m_v3Color = glm::vec3(1.0f - m_v3Color.r, 1.0f - m_v3Color.g, 1.0f - m_v3Color.b);
-		else
-			m_v3Color = glm::vec3(1.0f + m_v3Color.r, 1.0f + m_v3Color.g, 1.0f + m_v3Color.b);	//makes the triangle black when gradient
+		m_complement = !m_complement;	//makes the triangle black when gradient
 	}
 		//m_v3Color = glm::vec3(1.0f - m_v3Color.r, 1.0f - m_v3Color.g, 1.0f - m_v3Color.b);	//makes triangle white if on gradient triangle
 }
@@ -131,6 +128,9 @@ void AppClass::Display(void)
 	//read uniforms and send values
 	GLuint SolidColor = glGetUniformLocation(m_uShaderProgramID, "SolidColor");
 	glUniform3f(SolidColor, m_v3Color.r, m_v3Color.g, m_v3Color.b);
+
+	GLuint Complement = glGetUniformLocation(m_uShaderProgramID, "complement");
+	glUniform1i(Complement, m_complement);
 
 	//draw content
 	glDrawArrays(GL_TRIANGLES, 0, 3);
