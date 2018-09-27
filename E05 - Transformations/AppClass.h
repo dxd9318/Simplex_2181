@@ -16,7 +16,8 @@ class Application
 {
 	MyMesh* m_pMesh = nullptr;
 	String m_sProgrammer = "Alberto Bobadilla - labigm@rit.edu";
-	std::vector<MyMesh*> cubesVector;
+	std::vector<MyMesh*> cubeMeshes;		//contains mesh for every cube
+	std::vector<vector3> cubePositions;		//for transforming each cube position
 
 private:
 	static ImGuiObject gui; //GUI object
@@ -309,6 +310,10 @@ private:
 	Application& operator=(Application const& input);
 
 #pragma endregion
+
+	//helper function for setting position for all 46 cubes
+	void PlaceCubes();
+
 };
 
 #endif //__APPLICATIONCLASS_H_
