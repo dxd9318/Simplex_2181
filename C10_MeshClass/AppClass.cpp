@@ -3,7 +3,19 @@ void Application::InitVariables(void)
 {
 	//Make MyMesh object
 	m_pMesh = new MyMesh();
-	m_pMesh->GenerateCube(2.0f, C_BROWN);
+
+	m_pMesh->AddVertexPosition(vector3(-1, -1, 0));
+	m_pMesh->AddVertexColor(vector3(1, 0, 0));
+
+	m_pMesh->AddVertexPosition(vector3(1, -1, 0));
+	m_pMesh->AddVertexColor(vector3(0, 1, 0));
+	
+	m_pMesh->AddVertexPosition(vector3(-1, 1, 0));
+	m_pMesh->AddVertexColor(vector3(0, 0, 1));
+
+	m_pMesh->CompileOpenGL3X();
+
+	//m_pMesh->GenerateCube(2.0f, C_BROWN);
 
 	//Make MyMesh object
 	m_pMesh1 = new MyMesh();
