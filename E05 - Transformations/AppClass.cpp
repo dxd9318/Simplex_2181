@@ -30,10 +30,9 @@ void Application::Display(void)
 
 	matrix4 m4View = m_pCameraMngr->GetViewMatrix();
 	matrix4 m4Projection = m_pCameraMngr->GetProjectionMatrix();
-	
-	matrix4 m4Scale = glm::scale(IDENTITY_M4, vector3(2.0f,2.0f,2.0f));			//same for all cubes
-	
+
 	////////////////////////////////////////									//handles translations + rendering
+	matrix4 m4Scale = glm::scale(IDENTITY_M4, vector3(2.0f,2.0f,2.0f));			//same for all cubes
 	//POSITION EACH CUBE
 	PlaceCubes();
 
@@ -45,10 +44,8 @@ void Application::Display(void)
 		cubeMeshes[i]->Render(m4Projection, m4View, m4Model);					//renders each cube using model
 	}
 
-	//MOTION HANDLER
-	static float value = 0.0f;
+	//MOTION HANDLER (moves cube left and right)
 	static float turn = .1f;
-
 	for (int i = 0; i < 46; i++) 
 	{
 		cubePositions[i].x += turn;
@@ -68,6 +65,7 @@ void Application::Display(void)
 	//CREATE AND RENDER MODEL FOR EACH CUBE
 	//matrix4 m4Model = m4Scale * m4Translate;
 	//m_pMesh->Render(m4Projection, m4View, m4Model);
+
 	/////////////////////////////////////////
 
 	
@@ -89,7 +87,61 @@ void Application::Display(void)
 
 void Application::PlaceCubes() 
 {
-
+	//rows top to bottom, left to right
+	//row 1
+	cubePositions.push_back(vector3(-3.0f, 4.0f, 0.0f));
+	cubePositions.push_back(vector3(3.0f, 4.0f, 0.0f));
+	//row 2
+	cubePositions.push_back(vector3(-2.0f, 3.0f, 0.0f));
+	cubePositions.push_back(vector3(2.0f, 3.0f, 0.0f));
+	//row 3
+	cubePositions.push_back(vector3(-3.0f, 2.0f, 0.0f));
+	cubePositions.push_back(vector3(-2.0f, 2.0f, 0.0f));
+	cubePositions.push_back(vector3(-1.0f, 2.0f, 0.0f));
+	cubePositions.push_back(vector3(0.0f, 2.0f, 0.0f));
+	cubePositions.push_back(vector3(1.0f, 2.0f, 0.0f));
+	cubePositions.push_back(vector3(2.0f, 2.0f, 0.0f));
+	cubePositions.push_back(vector3(3.0f, 2.0f, 0.0f));
+	//row 4 (eyes)
+	cubePositions.push_back(vector3(-4.0f, 1.0f, 0.0f));
+	cubePositions.push_back(vector3(-3.0f, 1.0f, 0.0f));
+	cubePositions.push_back(vector3(-1.0f, 1.0f, 0.0f));
+	cubePositions.push_back(vector3(0.0f, 1.0f, 0.0f));
+	cubePositions.push_back(vector3(1.0f, 1.0f, 0.0f));
+	cubePositions.push_back(vector3(3.0f, 1.0f, 0.0f));
+	cubePositions.push_back(vector3(4.0f, 1.0f, 0.0f));
+	//row 5
+	cubePositions.push_back(vector3(-5.0f, 0.0f, 0.0f));
+	cubePositions.push_back(vector3(-4.0f, 0.0f, 0.0f));
+	cubePositions.push_back(vector3(-3.0f, 0.0f, 0.0f));
+	cubePositions.push_back(vector3(-2.0f, 0.0f, 0.0f));
+	cubePositions.push_back(vector3(-1.0f, 0.0f, 0.0f));
+	cubePositions.push_back(vector3(0.0f, 0.0f, 0.0f));
+	cubePositions.push_back(vector3(1.0f, 0.0f, 0.0f));
+	cubePositions.push_back(vector3(2.0f, 0.0f, 0.0f));
+	cubePositions.push_back(vector3(3.0f, 0.0f, 0.0f));
+	cubePositions.push_back(vector3(4.0f, 0.0f, 0.0f));
+	cubePositions.push_back(vector3(5.0f, 0.0f, 0.0f));
+	//row 6
+	cubePositions.push_back(vector3(-5.0f, -1.0f, 0.0f));
+	cubePositions.push_back(vector3(-3.0f, -1.0f, 0.0f));
+	cubePositions.push_back(vector3(-2.0f, -1.0f, 0.0f));
+	cubePositions.push_back(vector3(-1.0f, -1.0f, 0.0f));
+	cubePositions.push_back(vector3(0.0f, -1.0f, 0.0f));
+	cubePositions.push_back(vector3(1.0f, -1.0f, 0.0f));
+	cubePositions.push_back(vector3(2.0f, -1.0f, 0.0f));
+	cubePositions.push_back(vector3(3.0f, -1.0f, 0.0f));
+	cubePositions.push_back(vector3(5.0f, -1.0f, 0.0f));
+	//row 7
+	cubePositions.push_back(vector3(-5.0f, -2.0f, 0.0f));
+	cubePositions.push_back(vector3(-3.0f, -2.0f, 0.0f));
+	cubePositions.push_back(vector3(3.0f, -2.0f, 0.0f));
+	cubePositions.push_back(vector3(5.0f, -2.0f, 0.0f));
+	//row 8
+	cubePositions.push_back(vector3(-2.0f, -3.0f, 0.0f));
+	cubePositions.push_back(vector3(-1.0f, -3.0f, 0.0f));
+	cubePositions.push_back(vector3(1.0f, -3.0f, 0.0f));
+	cubePositions.push_back(vector3(2.0f, -3.0f, 0.0f));
 }
 
 void Application::Release(void)
