@@ -66,7 +66,15 @@ void Application::Display(void)
 		v3End = m_stopsList[0];
 	}
 
-	float fPercentage = static_cast<float>(MapValue(fTimer, 0.0, 2.0, 0.0, 1.0));
+
+	static DWORD dStartTime = GetTickCount();
+	DWORD dCurrentTime = GetTickCount();
+	DWORD dTime = dCurrentTime - dStartTime;
+	float fTime = dTime / 1000.0f;
+	float fTotalAnimationTime = 10.0f;
+	float fPercentage = fTime / fTotalAnimationTime;
+
+	//float fPercentage = static_cast<float>(MapValue(fTimer, 0.0, 2.0, 0.0, 1.0));
 
 	//calculate the current position
 	//vector3 v3CurrentPos = vector3(0.0f, 0.0f, 0.0f);
