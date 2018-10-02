@@ -51,20 +51,34 @@ void Application::Display(void)
 	static uint uClock = m_pSystem->GenClock(); //generate a new clock for that timer
 	fTimer += m_pSystem->GetDeltaTime(uClock); //get the delta time for that timer
 
-	//calculate the current position
-	vector3 v3CurrentPos;
-	
-
-
-
-
 	//your code goes here
-	v3CurrentPos = vector3(0.0f, 0.0f, 0.0f);
+	vector3 v3Start;
+	vector3 v3End;
+	static uint route = 0;
+	if (route < m_stopsList.size() - 1) 
+	{
+		v3Start = m_stopsList[route];
+		v3End = m_stopsList[route + 1];
+	}
+	else 
+	{
+		v3Start = m_stopsList[m_stopsList.size() - 1];
+		v3End = m_stopsList[0];
+	}
+
+	float fPercentage = static_cast<float>(MapValue(fTimer, 0.0, 2.0, 0.0, 1.0));
+
+	//calculate the current position
+	//vector3 v3CurrentPos = vector3(0.0f, 0.0f, 0.0f);
+	vector3 v3CurrentPos = glm::lerp(v3Start, v3End, fPercentage);
+
+	if (fPercentage >= 1.0f) {
+		route++;
+		fTimer = m_pSystem->GetDeltaTime(uClock);
+		route %= m_stopsList.size();
+	}
 	//-------------------
-	
 
-
-	
 	matrix4 m4Model = glm::translate(v3CurrentPos);
 	m_pModel->SetModelMatrix(m4Model);
 
