@@ -8,7 +8,7 @@ void Application::InitVariables(void)
 
 	for (int i = 0; i < 46; i++) 
 	{
-		m_pMesh->GenerateCube(1.0f, C_WHITE);
+		m_pMesh->GenerateCube(0.75f, C_WHITE);
 		cubeMeshes.push_back(m_pMesh);
 	}
 }
@@ -49,7 +49,7 @@ void Application::Display(void)
 	for (int i = 0; i < 46; i++) 
 	{
 		cubePositions[i].x += turn;
-		if (cubePositions[i].x >= 10.0f || cubePositions[i].x <= -10.0f)
+		if (cubePositions[i].x >= 10.0f || cubePositions[i].x <= -10.0f)		//need to make it: if position reaches ten spaces passed original position in either direction for each cube
 			turn *= -1;
 	}
 
