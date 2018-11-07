@@ -299,7 +299,7 @@ uint MyRigidBody::SAT(MyRigidBody* const a_pOther)
 	// Compute translation vector t
 	vector3 t = a_pOther->m_v3Center - this->m_v3Center;
 	// Bring translation into a's coordinate frame
-	t = vector3(dot(t, this->m_m4ToWorld[0]), dot(t, this->m_m4ToWorld[1]), dot(t, this->m_m4ToWorld[2]));
+	t = vector3(dot(vector4(t, 0), this->m_m4ToWorld[0]), dot(vector4(t, 0), this->m_m4ToWorld[1]), dot(vector4(t, 0), this->m_m4ToWorld[2]));
 
 	// Compute common subexpressions. Add in an epsilon term to
 	// counteract arithmetic errors when two edges are parallel and
