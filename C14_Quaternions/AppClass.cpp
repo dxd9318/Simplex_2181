@@ -72,6 +72,7 @@ void Application::Display(void)
 	matrix4 m4View = m_pCameraMngr->GetViewMatrix();
 	matrix4 m4Projection = m_pCameraMngr->GetProjectionMatrix();
 	
+#pragma region
 	//m4Projection = glm::ortho(0.0f, 2.0f, 0.0f, 2.0f, 0.01f, 20.0f);
 	float fFOV = 45.0;
 	float fAspect = static_cast<float>(m_pSystem->GetWindowHeight()) / 
@@ -88,8 +89,8 @@ void Application::Display(void)
 	//m_pCameraMngr->SetProjectionMatrix(m4Projection);
 	m_pCameraMngr->SetViewMatrix(m4View);
 
-
 	matrix4 m4Model = glm::translate(m_v3Orientation);
+#pragma endregion
 
 	//m_pMesh->Render(m4Projection, m4View, m4Model * 0.01f);
 	

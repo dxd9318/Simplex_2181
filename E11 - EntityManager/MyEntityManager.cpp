@@ -4,10 +4,14 @@ using namespace Simplex;
 MyEntityManager* MyEntityManager::m_pInstance = nullptr;
 void MyEntityManager::Init(void)
 {
+	m_uEntityCount = 0;
+	m_entityList.clear();
 }
 void MyEntityManager::Release(void)
 {
+
 }
+
 MyEntityManager* MyEntityManager::GetInstance()
 {
 	if (m_pInstance == nullptr)
@@ -16,8 +20,14 @@ MyEntityManager* MyEntityManager::GetInstance()
 	}
 	return m_pInstance;
 }
+
 void MyEntityManager::ReleaseInstance()
 {
+	if (m_pInstance != nullptr) 
+	{
+		delete m_pInstance;
+		m_pInstance = nullptr;
+	}
 }
 int Simplex::MyEntityManager::GetEntityIndex(String a_sUniqueID)
 {
