@@ -33,6 +33,7 @@ void Application::InitVariables(void)
 			
 			if (v3Position.x < 0.0f)
 			{
+				//planes treated as separating dimensions
 				if (v3Position.x < -17.0f)
 					m_pEntityMngr->AddDimension(-1, 1);
 				else
@@ -49,6 +50,7 @@ void Application::InitVariables(void)
 		}
 	}
 	m_pEntityMngr->Update();
+	m_pRoot = new MyOctant();
 	//steve
 	//m_pEntityMngr->AddEntity("Minecraft\\Steve.obj", "Steve");
 }
@@ -66,12 +68,14 @@ void Application::Update(void)
 	//Update Entity Manager
 	m_pEntityMngr->Update();
 
-	m_pMeshMngr->AddGridToRenderList(glm::rotate(IDENTITY_M4, 1.5708f, AXIS_Y));
+	//demo axes
+	/*m_pMeshMngr->AddGridToRenderList(glm::rotate(IDENTITY_M4, 1.5708f, AXIS_Y));
 	m_pMeshMngr->AddGridToRenderList(glm::translate(vector3(-17.0f, 0.0f, 0.0f)) * glm::rotate(IDENTITY_M4, 1.5708f, AXIS_Y));
-	m_pMeshMngr->AddGridToRenderList(glm::translate(vector3(17.0f, 0.0f, 0.0f)) * glm::rotate(IDENTITY_M4, 1.5708f, AXIS_Y));
+	m_pMeshMngr->AddGridToRenderList(glm::translate(vector3(17.0f, 0.0f, 0.0f)) * glm::rotate(IDENTITY_M4, 1.5708f, AXIS_Y));*/
 		
 	//Add objects to render list
 	m_pEntityMngr->AddEntityToRenderList(-1, true);
+	m_pRoot->Display();
 }
 void Application::Display(void)
 {
