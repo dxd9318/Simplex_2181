@@ -24,6 +24,7 @@ void MyRigidBody::Init(void)
 	m_v3ARBBSize = ZERO_V3;
 
 	m_m4ToWorld = IDENTITY_M4;
+	m_m3LocalAxes = static_cast<matrix3>(m_m4ToWorld);
 }
 void MyRigidBody::Swap(MyRigidBody& a_pOther)
 {
@@ -294,12 +295,18 @@ uint MyRigidBody::SAT(MyRigidBody* const a_pOther)
 	// Compute rotation matrix expressing b in a's coordinate frame
 	for (int i = 0; i < 3; i++)
 		for (int j = 0; j < 3; j++)
-			R[i][j] = dot(this->m_m4ToWorld[i], a_pOther->m_m4ToWorld[j]);
+			R[i][j] = dot(this->m_m3LocalAxes[i], a_pOther->m_m3LocalAxes[j]);
 
 	// Compute translation vector t
 	vector3 t = a_pOther->m_v3Center - this->m_v3Center;
 	// Bring translation into a's coordinate frame
 	t = vector3(dot(vector4(t, 0), this->m_m4ToWorld[0]), dot(vector4(t, 0), this->m_m4ToWorld[1]), dot(vector4(t, 0), this->m_m4ToWorld[2]));
+
+
+	/*t = vector3(dot(t, this->m_m3LocalAxes[0]), dot(t, this->m_m3LocalAxes[1]), dot(t, this->m_m3LocalAxes[2]));*/
+	/*t = vector3(dot(vector4(t, 0), vector4(this->m_m4ToWorld[0][0], this->m_m4ToWorld[0][1], this->m_m4ToWorld[0][2], 0)), 
+		dot(vector4(t, 0), vector4(this->m_m4ToWorld[1][0], this->m_m4ToWorld[1][1], this->m_m4ToWorld[1][2], 0)), 
+		dot(vector4(t, 0), vector4(this->m_m4ToWorld[2][0], this->m_m4ToWorld[2][1], this->m_m4ToWorld[2][2], 0)));*/
 
 	// Compute common subexpressions. Add in an epsilon term to
 	// counteract arithmetic errors when two edges are parallel and
